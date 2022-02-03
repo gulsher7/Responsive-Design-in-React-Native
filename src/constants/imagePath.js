@@ -1,5 +1,5 @@
 export default {
-    icHome: require('../assets/images/home.png'),
-    icProfile: require('../assets/images/person.png'),
-    icExplore: require('../assets/images/explore.png'),
+    showEye: require('../assests/images/show.png'),
+    hideEye: require('../assests/images/hide.png'),
+
 }
