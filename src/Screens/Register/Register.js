@@ -102,7 +102,7 @@ const Register = ({ navigation }) => {
                     <ButtonComp
                         btnText={'Continue'}
 
-                        onPress={() => navigation.navigate(navgiationStrings.REGISTER)}
+                        onPress={() => navigation.navigate(navgiationStrings.SET_PASSWORD)}
                         btnStyle={{ marginVertical: moderateVerticalScale(32) }}
                     />
                 </KeyboardAwareScrollView>

@@ -37,7 +37,10 @@ const Login = ({ navigation }) => {
                     onPressRight={() => setVisible(!isVisible)}
                 />
 
-                <TouchableOpacity activeOpacity={0.7} style={styles.forgotView}>
+                <TouchableOpacity 
+                activeOpacity={0.7} style={styles.forgotView}
+                onPress={()=>navigation.navigate(navigationStings.FORGOT_PASSWORD)}
+                >
                     <Text style={styles.forgotText} >Forgot Password ?</Text>
                 </TouchableOpacity>
 

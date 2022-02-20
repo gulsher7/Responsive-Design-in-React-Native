@@ -1,25 +1,74 @@
 //import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView, Text, View, Keyboard } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { moderateVerticalScale } from 'react-native-size-matters';
+import ButtonComp from '../../Components/ButtonComp';
+import HeaderComp from '../../Components/HeaderComp';
+import TextInputWithLabel from '../../Components/TextInputWithLabel';
+import imagePath from '../../constants/imagePath';
+import navgiationStrings from '../../constants/navgiationStrings';
+import styles from './styles';
 
 // create a component
-const ForgotPassword = () => {
+const ForgotPassword = ({ navigation }) => {
+
+const [keybaordHeight, setKeyboardHeight] = useState(0)
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', (event) => {
+            console.log("event trigger on show keyboard", event)
+            setKeyboardHeight(event.endCoordinates.height - 20)
+        })
+
+        const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', (event) => {
+            console.log("event trigger on hide keyboard", event)
+            setKeyboardHeight(0)
+        });
+        return () => {
+            keyboardDidShowListener.remove();
+            keyboardDidHideListener.remove();
+        }
+    }, [])
+
     return (
-        <View style={styles.container}>
-            <Text>ForgotPassword</Text>
-        </View>
+        <SafeAreaView style={{ flex: 1 }}>
+            <View style={styles.container}>
+                <HeaderComp
+                />
+
+                <View style={{ flex: 1 }}>
+
+                    <View style={{ flex: 0.2, alignItems: 'center', justifyContent: 'center' }}>
+                        <Text>Lock ICON</Text>
+                    </View>
+
+                    <View style={{ flex: 0.4 }}>
+                        <Text style={styles.headingText}>Forgot Password</Text>
+                        <Text style={styles.descText}>Enter the email address associated with your account.</Text>
+                    </View>
+
+
+                    <View style={{ flex: 0.4, marginBottom: keybaordHeight }}>
+                        <TextInputWithLabel
+                            label="Email"
+                            placeHolder='Enter your email'
+                            inputStyle={{ marginBottom: moderateVerticalScale(28) }}
+                            keyboardType='email-address'
+                        />
+                        <ButtonComp
+                            btnText={'Send'}
+                            onPress={() => navigation.navigate(navgiationStrings.SET_PASSWORD)}
+                            btnStyle={{}}
+                        />
+                    </View>
+
+                </View>
+            </View>
+
+        </SafeAreaView>
+
     );
 };
 
-// define your styles
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#2c3e50',
-    },
-});
-
-//make this component available to the app
 export default ForgotPassword;
