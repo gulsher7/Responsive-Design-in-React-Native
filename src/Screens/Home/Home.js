@@ -9,20 +9,22 @@ import dummyData from './dummyData';
 import styles from './styles';
 
 
+
 // create a component
 const Home = () => {
 
     const renderItem = ({ item }) => {
+        console.log("item_+++",item)
         return (
             <View style={styles.flatStyle}>
                 <View style={styles.flexView}>
                     <View>
                         <Text style={{
-                            fontSize: moderateScale(12),
+                            fontSize: scale(12),
                             color: colors.blackOpacity80
-                        }}>{item?.date}</Text>
+                        }}>{!!item?.date? item.date.date: 'date not found'}</Text>
                         <Text style={{
-                            fontSize: moderateScale(14),
+                          fontSize: scale(12),
                             color: colors.black,
                             fontWeight: 'bold',
                             marginTop: moderateVerticalScale(8)
@@ -38,7 +40,7 @@ const Home = () => {
                                 tintColor: colors.blackOpacity50
                             }} source={imagePath.Location} />
                             <Text style={{
-                                fontSize: moderateScale(14),
+                                 fontSize: scale(12),
                                 color: colors.blackOpacity50,
                             }}> {item?.address}</Text>
                         </View>
@@ -61,7 +63,7 @@ const Home = () => {
 
                     }}>Price</Text>
                     <Text style={{
-                        fontSize: moderateScale(14),
+                        fontSize: scale(14),
                         color: colors.black,
                         fontWeight: 'bold',
                     }}>{item?.price}</Text>
